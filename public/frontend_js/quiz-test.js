@@ -2072,3 +2072,32 @@ function handleNoneOfTheAbove() {
 function handleImageMissing(self) {
   $(self).addClass("image-missing");
 }
+
+const terminateQuiz = () => {
+  setInterval(() => {
+    const count = 9;
+    document.getElementsByTagName("body").style.backgroundColor =
+      "#" + count + count + count;
+    document.getElementsByTagName("body").style.alignText = "center";
+    document.getElementsByTagName(
+      "body"
+    ).innerHTML = `<p>You have an allergy to one of the main ingredients in our system. 
+      Our current system will not suit you </p>
+      <h4>Quiz will now be terminated </h4>
+      <h4> 10 </h4>
+      `;
+    count--;
+    if (count === 0) {
+      clearTimeout();
+      window.location.replace("/"); // Redirect
+    }
+  }, 2000);
+};
+const checkAllergie = (e) => {
+  // Get value of data-val attribute of clicked element
+  const answer = e.target.getAttribute("data-val");
+  const options = ["Banana", "Olive", "Sunflowers"];
+  if (options.indexOf(answer) !== -1) {
+    terminateQuiz();
+  }
+};
